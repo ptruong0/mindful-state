@@ -1,36 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:mindful_state/settings_page.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavigationExample(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.deepPurple[300],
+        ),
+        // Enable Material 3 (Material You) design.
+        useMaterial3: true,
+      ),
+      home: const MaterialNavigationBar(),
     );
   }
 }
 
-class NavigationExample extends StatefulWidget {
-  const NavigationExample({super.key});
+class MaterialNavigationBar extends StatefulWidget {
+  const MaterialNavigationBar({super.key});
 
   @override
-  State<NavigationExample> createState() => _NavigationExampleState();
+  State<MaterialNavigationBar> createState() => _MaterialNavigationBarState();
 }
 
-class _NavigationExampleState extends State<NavigationExample> {
+class _MaterialNavigationBarState extends State<MaterialNavigationBar> {
   int currentPageIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          child: Container(
+            padding: const EdgeInsets.only(left: 10),
+            child: const CircleAvatar(
+              backgroundImage: AssetImage('images/user_avatar.jpg'),
+              radius: 15,
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.deepPurple[200],
         onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+          setState(
+            () {
+              currentPageIndex = index;
+            },
+          );
         },
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
@@ -92,6 +119,39 @@ class _NavigationExampleState extends State<NavigationExample> {
           ),
         ),
       ][currentPageIndex],
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            const DrawerHeader(
+              child: CircleAvatar(
+                backgroundImage: AssetImage('images/user_avatar.jpg'),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text(
+                'Settings',
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MaterialSettings(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
+              onTap: () {
+                // navigation to the about page
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
