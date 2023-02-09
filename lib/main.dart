@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 
@@ -8,20 +9,31 @@ void main() {
 class MindfulState extends StatelessWidget {
   const MindfulState({super.key});
 
+  static final _defaultLightColorScheme =
+      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+  static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue, brightness: Brightness.dark);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          color: Colors.deepPurple[300],
+    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: lightColorScheme ?? _defaultLightColorScheme,
+          //colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+          // Enable Material 3 (Material You) design.
+          useMaterial3: true,
         ),
-        // Enable Material 3 (Material You) design.
-        useMaterial3: true,
-      ),
-      home: const LoginPage(),
-    );
+        darkTheme: ThemeData(
+          colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
+          useMaterial3: true,
+        ),
+        themeMode: ThemeMode.dark,
+        home: const LoginPage(),
+      );
+    });
   }
 }
 
@@ -31,7 +43,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[300],
+      //backgroundColor: Colors.deepPurple[300],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +51,7 @@ class LoginPage extends StatelessWidget {
             const Text(
               "welcome to",
               style: TextStyle(
-                color: Colors.white70,
+                //color: Colors.white70,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
@@ -47,7 +59,7 @@ class LoginPage extends StatelessWidget {
             const Text(
               "mindful state",
               style: TextStyle(
-                color: Colors.white,
+                //color: Colors.white,
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
@@ -70,16 +82,16 @@ class LoginPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.deepPurple[200],
+                  //foregroundColor: Colors.white,
+                  //backgroundColor: Colors.deepPurple[200],
                   minimumSize: const Size(100, 40)),
               child: const Text('login'),
             ),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.deepPurple[200],
+                  //foregroundColor: Colors.white,
+                  //backgroundColor: Colors.deepPurple[200],
                   minimumSize: const Size(100, 40)),
               child: const Text('sign up'),
             ),

@@ -1,34 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mindful_state/settings_page.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          color: Colors.deepPurple[300],
-        ),
-        // Enable Material 3 (Material You) design.
-        useMaterial3: true,
-      ),
-      home: const MaterialNavigationBar(),
-    );
-  }
+  State<HomePage> createState() => _HomePageState();
 }
 
-class MaterialNavigationBar extends StatefulWidget {
-  const MaterialNavigationBar({super.key});
-
-  @override
-  State<MaterialNavigationBar> createState() => _MaterialNavigationBarState();
-}
-
-class _MaterialNavigationBarState extends State<MaterialNavigationBar> {
+class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -51,7 +31,7 @@ class _MaterialNavigationBarState extends State<MaterialNavigationBar> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.deepPurple[200],
+        //backgroundColor: Colors.deepPurple[200],
         onDestinationSelected: (int index) {
           setState(
             () {
@@ -64,33 +44,33 @@ class _MaterialNavigationBarState extends State<MaterialNavigationBar> {
           NavigationDestination(
             selectedIcon: Icon(
               Icons.home,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             icon: Icon(
               Icons.home_outlined,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             label: 'Home',
           ),
           NavigationDestination(
             selectedIcon: Icon(
               Icons.laptop,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             icon: Icon(
               Icons.laptop_outlined,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             label: 'Journal',
           ),
           NavigationDestination(
             selectedIcon: Icon(
               Icons.local_activity,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             icon: Icon(
               Icons.local_activity_outlined,
-              color: Colors.white,
+              //color: Colors.white,
             ),
             label: 'Activities',
           ),
@@ -98,21 +78,21 @@ class _MaterialNavigationBarState extends State<MaterialNavigationBar> {
       ),
       body: <Widget>[
         Container(
-          color: Colors.deepPurple[300],
+          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 1',
           ),
         ),
         Container(
-          color: Colors.deepPurple[300],
+          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 2',
           ),
         ),
         Container(
-          color: Colors.deepPurple[300],
+          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 3',

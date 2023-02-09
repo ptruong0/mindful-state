@@ -8,7 +8,6 @@ class MaterialSettings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Center(
         child: Container(
