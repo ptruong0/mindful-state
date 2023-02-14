@@ -18,51 +18,43 @@ class MaterialSettings extends StatelessWidget {
                 title: "General",
                 children: [
                   const _CustomListTile(
-                      title: "About Phone", icon: Icons.phone_android),
+                      title: "Profile Information", icon: Icons.person),
                   _CustomListTile(
                       title: "Dark Mode",
                       icon: Icons.brightness_3,
                       trailing: Switch(value: false, onChanged: (value) {})),
-                  const _CustomListTile(
-                      title: "System Apps Updater", icon: Icons.cloud_download),
-                  const _CustomListTile(
-                      title: "Security Status", icon: Icons.security),
-                ],
-              ),
-              _SingleSection(
-                title: "Network",
-                children: [
-                  const _CustomListTile(
-                      title: "SIM Cards and Networks", icon: Icons.sim_card),
-                  _CustomListTile(
-                    title: "Wi-Fi",
-                    icon: Icons.wifi,
-                    trailing: Switch(value: true, onChanged: (val) {}),
-                  ),
-                  _CustomListTile(
-                    title: "Bluetooth",
-                    icon: Icons.bluetooth,
-                    trailing: Switch(value: false, onChanged: (val) {}),
-                  ),
-                  const _CustomListTile(
-                    title: "VPN",
-                    icon: Icons.vpn_key,
-                  )
                 ],
               ),
               const _SingleSection(
                 title: "Privacy and Security",
                 children: [
                   _CustomListTile(
-                      title: "Multiple Users", icon: Icons.people_outline),
-                  _CustomListTile(
-                      title: "Lock Screen", icon: Icons.lock_outline),
-                  _CustomListTile(title: "Display", icon: Icons.screen_share),
-                  _CustomListTile(
-                      title: "Sound and Vibration", icon: Icons.volume_up),
-                  _CustomListTile(title: "Themes", icon: Icons.color_lens)
+                      title: "Privacy Policy", icon: Icons.privacy_tip),
+                  _CustomListTile(title: "Acknowledgements", icon: Icons.info),
+                  _CustomListTile(title: "Contact Us", icon: Icons.email),
                 ],
               ),
+              // _SingleSection(
+              //   title: "Network",
+              //   children: [
+              //     const _CustomListTile(
+              //         title: "SIM Cards and Networks", icon: Icons.sim_card),
+              //     _CustomListTile(
+              //       title: "Wi-Fi",
+              //       icon: Icons.wifi,
+              //       trailing: Switch(value: true, onChanged: (val) {}),
+              //     ),
+              //     _CustomListTile(
+              //       title: "Bluetooth",
+              //       icon: Icons.bluetooth,
+              //       trailing: Switch(value: false, onChanged: (val) {}),
+              //     ),
+              //     const _CustomListTile(
+              //       title: "VPN",
+              //       icon: Icons.vpn_key,
+              //     )
+              //   ],
+              // ),
             ],
           ),
         ),

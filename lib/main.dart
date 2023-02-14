@@ -10,9 +10,9 @@ class MindfulState extends StatelessWidget {
   const MindfulState({super.key});
 
   static final _defaultLightColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+      ColorScheme.fromSwatch(primarySwatch: Colors.pink);
   static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue, brightness: Brightness.dark);
+      primarySwatch: Colors.pink, brightness: Brightness.dark);
 
   // This widget is the root of your application.
   @override
