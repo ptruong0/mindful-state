@@ -22,15 +22,13 @@ class MindfulState extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: lightColorScheme ?? _defaultLightColorScheme,
-          //colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
-          // Enable Material 3 (Material You) design.
           useMaterial3: true,
         ),
         darkTheme: ThemeData(
           colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
           useMaterial3: true,
         ),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.light,
         home: const LoginPage(),
       );
     });
@@ -43,7 +41,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.deepPurple[300],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +48,6 @@ class LoginPage extends StatelessWidget {
             const Text(
               "welcome to",
               style: TextStyle(
-                //color: Colors.white70,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
@@ -59,7 +55,6 @@ class LoginPage extends StatelessWidget {
             const Text(
               "mindful state",
               style: TextStyle(
-                //color: Colors.white,
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
               ),
@@ -82,17 +77,15 @@ class LoginPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                  //foregroundColor: Colors.white,
-                  //backgroundColor: Colors.deepPurple[200],
-                  minimumSize: const Size(100, 40)),
+                minimumSize: const Size(100, 40),
+              ),
               child: const Text('login'),
             ),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  //foregroundColor: Colors.white,
-                  //backgroundColor: Colors.deepPurple[200],
-                  minimumSize: const Size(100, 40)),
+                minimumSize: const Size(100, 40),
+              ),
               child: const Text('sign up'),
             ),
           ],

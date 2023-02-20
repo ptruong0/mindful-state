@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        //backgroundColor: Colors.deepPurple[200],
         onDestinationSelected: (int index) {
           setState(
             () {
@@ -44,33 +43,27 @@ class _HomePageState extends State<HomePage> {
           NavigationDestination(
             selectedIcon: Icon(
               Icons.home,
-              //color: Colors.white,
             ),
             icon: Icon(
               Icons.home_outlined,
-              //color: Colors.white,
             ),
             label: 'Home',
           ),
           NavigationDestination(
             selectedIcon: Icon(
               Icons.laptop,
-              //color: Colors.white,
             ),
             icon: Icon(
               Icons.laptop_outlined,
-              //color: Colors.white,
             ),
             label: 'Journal',
           ),
           NavigationDestination(
             selectedIcon: Icon(
               Icons.local_activity,
-              //color: Colors.white,
             ),
             icon: Icon(
               Icons.local_activity_outlined,
-              //color: Colors.white,
             ),
             label: 'Activities',
           ),
@@ -78,21 +71,18 @@ class _HomePageState extends State<HomePage> {
       ),
       body: <Widget>[
         Container(
-          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 1',
           ),
         ),
         Container(
-          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 2',
           ),
         ),
         Container(
-          //color: Colors.deepPurple[300],
           alignment: Alignment.center,
           child: const Text(
             'Page 3',

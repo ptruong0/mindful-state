@@ -34,27 +34,6 @@ class MaterialSettings extends StatelessWidget {
                   _CustomListTile(title: "Contact Us", icon: Icons.email),
                 ],
               ),
-              // _SingleSection(
-              //   title: "Network",
-              //   children: [
-              //     const _CustomListTile(
-              //         title: "SIM Cards and Networks", icon: Icons.sim_card),
-              //     _CustomListTile(
-              //       title: "Wi-Fi",
-              //       icon: Icons.wifi,
-              //       trailing: Switch(value: true, onChanged: (val) {}),
-              //     ),
-              //     _CustomListTile(
-              //       title: "Bluetooth",
-              //       icon: Icons.bluetooth,
-              //       trailing: Switch(value: false, onChanged: (val) {}),
-              //     ),
-              //     const _CustomListTile(
-              //       title: "VPN",
-              //       icon: Icons.vpn_key,
-              //     )
-              //   ],
-              // ),
             ],
           ),
         ),
