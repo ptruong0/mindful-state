@@ -21,6 +21,22 @@ class _HomePageState extends State<HomePage> {
   // Build the HomePage widget
   @override
   Widget build(BuildContext context) {
+    // Get current time for greeting
+    final now = DateTime.now();
+    final currentTimeOfDay = now.hour;
+
+    // Greeting to display
+    String greeting;
+    if (currentTimeOfDay >= 5 && currentTimeOfDay < 12) {
+      greeting = 'good morning';
+    } else if (currentTimeOfDay >= 12 && currentTimeOfDay < 18) {
+      greeting = 'good afternoon';
+    } else {
+      greeting = 'good evening';
+    }
+
+    // temporary placeholder for user name
+    final userName = 'user';
     // Return a Scaffold widget
     return Scaffold(
       key: _scaffoldKey, // Use the scaffold key to identify the scaffold
@@ -85,11 +101,34 @@ class _HomePageState extends State<HomePage> {
       ),
       // Define the body of the scaffold based on the selected page index
       body: <Widget>[
-        Container(
-          alignment: Alignment.center,
-          child: const Text(
-            'Page 1',
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 50), // add some top padding
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                greeting,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 10), // add some spacing
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                userName,
+                style: const TextStyle(fontSize: 24),
+              ),
+            ),
+            const SizedBox(height: 100), // add some spacing
+            Container(
+              alignment: Alignment.center,
+              child: const Text(
+                'how are you feeling today?',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+          ],
         ),
         Container(
           alignment: Alignment.center,
