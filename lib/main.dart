@@ -30,7 +30,7 @@ class MindfulState extends StatelessWidget {
             colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
             useMaterial3: true,
           ),
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           home: IntroductionPage(),
         );
       },
@@ -54,7 +54,6 @@ class IntroductionPage extends StatelessWidget {
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: TextStyle(fontSize: 19.0),
       //descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
       imagePadding: EdgeInsets.zero,
     );
     return IntroductionScreen(

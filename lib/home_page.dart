@@ -81,21 +81,21 @@ class _HomePageState extends State<HomePage> {
           ),
           NavigationDestination(
             selectedIcon: Icon(
-              Icons.laptop,
-            ),
-            icon: Icon(
-              Icons.laptop_outlined,
-            ),
-            label: 'Journal',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(
               Icons.local_activity,
             ),
             icon: Icon(
               Icons.local_activity_outlined,
             ),
             label: 'Activities',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.health_and_safety,
+            ),
+            icon: Icon(
+              Icons.health_and_safety_outlined,
+            ),
+            label: 'Health',
           ),
         ],
       ),
@@ -131,12 +131,18 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         Container(
+          // TODO: finish contents for second page
+          // ideally this page will call google maps API and recommend local
+          // activities that we will rank based on user's mood
           alignment: Alignment.center,
           child: const Text(
             'Page 2',
           ),
         ),
         Container(
+          // TODO: finish contents for third page
+          // ideally this page will display data gathered from user
+          // such as mood, stats, and weather?
           alignment: Alignment.center,
           child: const Text(
             'Page 3',

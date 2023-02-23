@@ -1,9 +1,6 @@
-
 // Importing required packages and files
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'home_page.dart';
 
 // The entry point of the application
@@ -17,34 +14,12 @@ class MindfulState extends StatelessWidget {
   // Constructor for the MindfulState widget
   const MindfulState({super.key});
 
-  // Defining the default light color scheme for the app
-  static final _defaultLightColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.pink);
-
-  // Defining the default dark color scheme for the app
-  static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.pink, brightness: Brightness.dark);
-
   // Building the widget tree for the MindfulState widget
   @override
   Widget build(BuildContext context) {
-    // Using DynamicColorBuilder to dynamically generate light and dark color schemes based on device settings
-    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      // Creating the MaterialApp widget and setting its properties
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: lightColorScheme ?? _defaultLightColorScheme,
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
-          useMaterial3: true,
-        ),
-        themeMode: ThemeMode.light,
-        home: const LoginPage(),
-      );
-    });
+    return const MaterialApp(
+      home: LoginPage(),
+    );
   }
 }
 
