@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     // temporary placeholder for user name
-    final userName = 'user';
+    const userName = 'user';
     // Return a Scaffold widget
     return Scaffold(
       key: _scaffoldKey, // Use the scaffold key to identify the scaffold

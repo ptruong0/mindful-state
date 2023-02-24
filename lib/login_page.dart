@@ -31,6 +31,7 @@ class LoginPage extends StatelessWidget {
   // Building the widget tree for the LoginPage widget
   @override
   Widget build(BuildContext context) {
+    final double imageHeight = MediaQuery.of(context).size.height * 0.4;
     // Creating a scaffold widget and centering its child
     return Scaffold(
       body: Center(
@@ -38,13 +39,6 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "welcome to",
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
             const Text(
               "mindful state",
               style: TextStyle(
@@ -56,7 +50,7 @@ class LoginPage extends StatelessWidget {
               height: 20.0,
             ),
             // Displaying an image from the assets folder
-            Image.asset('images/notes.png'),
+            Image.asset('images/login-bw.png', height: imageHeight),
             const SizedBox(
               height: 20.0,
             ),
