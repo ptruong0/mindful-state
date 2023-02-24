@@ -34,7 +34,7 @@ class MindfulState extends StatelessWidget {
             colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
             useMaterial3: true,
           ),
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           home: IntroductionPage(),
         );
       },
