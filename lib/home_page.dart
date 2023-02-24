@@ -115,9 +115,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 10), // add some spacing
             Container(
               alignment: Alignment.center,
-              child: Text(
+              child: const Text(
                 userName,
-                style: const TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24),
               ),
             ),
             const SizedBox(height: 100), // add some spacing
