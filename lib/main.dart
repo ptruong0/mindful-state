@@ -3,9 +3,12 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'login_page.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MindfulState());
 }
 
