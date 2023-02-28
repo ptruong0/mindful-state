@@ -1,6 +1,9 @@
 // Importing required packages and files
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sign_in_button/sign_in_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import 'home_page.dart';
 
 // The entry point of the application
@@ -46,16 +49,16 @@ class LoginPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            // Displaying an image from the assets folder
             Image.asset('images/login-bw.png', height: imageHeight),
-            const SizedBox(
-              height: 20.0,
-            ),
-            // Creating an elevated button to navigate to the home page
-            ElevatedButton(
+            // implementing the sign in button from the sign_in_button package
+            // the onPressed method is used to navigate to the home page
+            // perhaps if time allows we can keep the old material3 sign in/up
+            // button and handle authentication ourselves in addition to the
+            // Google buttons
+            // TODO: implement Auth with Firebase
+            SignInButton(
+              Buttons.google,
+              text: "Sign in with Google",
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -65,18 +68,16 @@ class LoginPage extends StatelessWidget {
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(100, 40),
-              ),
-              child: const Text('login'),
             ),
-            // Creating an elevated button for signing up
-            ElevatedButton(
+            // creating some space between the sign in and sign up buttons
+            const SizedBox(
+              height: 10,
+            ),
+            // TODO: implement Auth with Firebase
+            SignInButton(
+              Buttons.google,
+              text: "Sign up with Google",
               onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(100, 40),
-              ),
-              child: const Text('sign up'),
             ),
           ],
         ),
