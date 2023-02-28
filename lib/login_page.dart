@@ -52,6 +52,9 @@ class LoginPage extends StatelessWidget {
             Image.asset('images/login-bw.png', height: imageHeight),
             // implementing the sign in button from the sign_in_button package
             // the onPressed method is used to navigate to the home page
+            // perhaps if time allows we can keep the old material3 sign in/up
+            // button and handle authentication ourselves in addition to the
+            // Google buttons
             // TODO: implement Auth with Firebase
             SignInButton(
               Buttons.google,
