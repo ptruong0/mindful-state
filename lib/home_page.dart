@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindful_state/settings_page.dart';
 
@@ -7,7 +8,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Define a stateful widget called HomePage
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final User? user;
+  const HomePage({Key? key, required this.user}) : super(key: key);
 
   // Return a new state object
   @override
@@ -60,8 +62,7 @@ class _HomePageState extends State<HomePage> {
   int currentActivityIndex = 0;
   // -----------------------------------------------------------------------
 
-
-  // todo: recommendation algorithm 
+  // todo: recommendation algorithm
   // click handler for generate button
   void getActivity() {
     print(moodValue);
@@ -148,7 +149,10 @@ class _HomePageState extends State<HomePage> {
     }
 
     // temporary placeholder for user name
-    const userName = 'user';
+    String userName = 'user';
+    if (widget.user != null && widget.user!.displayName != null) {
+      userName = widget.user!.displayName!;
+    }
     // Return a Scaffold widget
     return Scaffold(
       key: _scaffoldKey, // Use the scaffold key to identify the scaffold
@@ -162,11 +166,16 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: const CircleAvatar(
-                    backgroundImage: AssetImage('images/user_avatar.jpg'),
-                    radius: 15,
-                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: widget.user != null && widget.user?.photoURL != null
+                      ? CircleAvatar(
+                          backgroundImage: NetworkImage(widget.user!.photoURL!),
+                          radius: 15,
+                        )
+                      : const CircleAvatar(
+                          backgroundImage: AssetImage('images/user_avatar.jpg'),
+                          radius: 15,
+                        ),
                 ),
               ],
             ),
@@ -223,7 +232,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             // weather info container
             Container(
-              width: MediaQuery.of(context).size.width, // takes up entire screen width
+              width: MediaQuery.of(context)
+                  .size
+                  .width, // takes up entire screen width
               padding:
                   const EdgeInsets.symmetric(vertical: 12.0, horizontal: 40.0),
               color: Theme.of(context).colorScheme.shadow,
@@ -312,10 +323,12 @@ class _HomePageState extends State<HomePage> {
 
             // greeting text
             Container(
-              margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              margin:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Text(
                 '$greeting, $userName',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -331,7 +344,8 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.sentiment_very_dissatisfied, size: 30.0),    // sad face icon
+                const Icon(Icons.sentiment_very_dissatisfied,
+                    size: 30.0), // sad face icon
                 SizedBox(
                   width: 250,
                   child: Expanded(
@@ -350,8 +364,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const Icon(Icons.sentiment_very_satisfied, size: 30.0),   // happy face icon
-              ],    
+                const Icon(Icons.sentiment_very_satisfied,
+                    size: 30.0), // happy face icon
+              ],
             ),
             const SizedBox(height: 10), // add some spacing
 
@@ -391,23 +406,25 @@ class _HomePageState extends State<HomePage> {
             // button to generate activity
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.background,
+                //backgroundColor: Theme.of(context).colorScheme.primary,
+                //foregroundColor: Theme.of(context).colorScheme.background,
                 elevation: 1,
               ),
               onPressed: getActivity,
               child: const Text('Give me an activity'),
             ),
-            Expanded(child: Container()),   // fill space so that the below container sticks to bottom
+            Expanded(
+                child:
+                    Container()), // fill space so that the below container sticks to bottom
 
             // display recommended activity
             Container(
-              // only render if it has been generated already
+                // only render if it has been generated already
                 child: activities.isNotEmpty
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.all(10),
-                        color: Theme.of(context).primaryColor,
+                        //color: Theme.of(context).primaryColor,
                         child: Column(
                           children: [
                             // section label
@@ -422,9 +439,9 @@ class _HomePageState extends State<HomePage> {
                             // refresh button to get the next top activity
                             IconButton(
                                 icon: const Icon(Icons.refresh),
-                                color: Theme.of(context).colorScheme.primary,
+                                //color: Theme.of(context).colorScheme.primary,
                                 onPressed:
-                                  // prevent further refreshes if reached the last activity in the list
+                                    // prevent further refreshes if reached the last activity in the list
                                     currentActivityIndex < activities.length - 1
                                         ? () {
                                             setState(() {
@@ -460,12 +477,19 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const DrawerHeader(
+            DrawerHeader(
               // Display the user's avatar in the drawer header
               child: CircleAvatar(
-                backgroundImage: AssetImage('images/user_avatar.jpg'),
+                backgroundImage: widget.user?.photoURL != null
+                    ? NetworkImage(
+                        widget.user!.photoURL!,
+                      )
+                    : const AssetImage('images/user_avatar.jpg')
+                        as ImageProvider,
+                radius: 50,
               ),
             ),
+
             // Define a list tile for the settings page
             ListTile(
               leading: const Icon(Icons.settings),

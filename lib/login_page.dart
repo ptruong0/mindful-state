@@ -1,9 +1,8 @@
 // Importing required packages and files
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindful_state/services/auth_service.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import 'home_page.dart';
 
 // The entry point of the application
@@ -60,13 +59,14 @@ class LoginPage extends StatelessWidget {
               Buttons.google,
               text: "Sign in with Google",
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const HomePage();
-                    },
-                  ),
-                );
+                AuthService().signInWithgoogle((user) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(user: user),
+                    ),
+                  );
+                });
               },
             ),
             // creating some space between the sign in and sign up buttons

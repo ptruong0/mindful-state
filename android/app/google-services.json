@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "827605236275",
+    "project_id": "mindful-state-auth",
+    "storage_bucket": "mindful-state-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827605236275:android:19bf16668a455d0e914146",
+        "android_client_info": {
+          "package_name": "com.example.mindful_state"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827605236275-1ka1c3caqerbd4p83t3k884i4icis4s5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mindful_state",
+            "certificate_hash": "36f1e4416c3d76a59642aefd0a42becbd003a116"
+          }
+        },
+        {
+          "client_id": "827605236275-4telkhohom1a4jtr496lfmu6lbc9hdeq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0bTr4DBBNOtM9UTKR8AWaCiGuy7fR9is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827605236275-4telkhohom1a4jtr496lfmu6lbc9hdeq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "827605236275-9f692o1gvgtjgsuhfofkdd8vrtg6jpr1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mindfulState"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
