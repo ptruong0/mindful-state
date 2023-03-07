@@ -153,6 +153,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _refreshData() async {
+    await Database.initializeData();
     final data = await Database.getItems();
     setState(() {
       myData = data;
