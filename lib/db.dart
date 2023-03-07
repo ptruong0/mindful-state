@@ -136,4 +136,10 @@ class Database {
     final db = await Database.db();
     return db.query('Activities', orderBy: "id");
   }
+
+  static Future<List<Map<String, dynamic>>> filterData(String? category) async {
+    final db = await Database.db();
+    return await db
+        .rawQuery('SELECT * FROM Activities WHERE category=?', [category]);
+  }
 }
