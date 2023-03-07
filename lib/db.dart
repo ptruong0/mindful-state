@@ -95,7 +95,7 @@ class Database {
     db.rawInsert(
         "INSERT INTO Activities(name, category, outdoors, energy) VALUES('Start a DIY project or home improvement task.', 'productivity', 0, 3)");
     db.rawInsert(
-        "INSERT INTO Activities(name, category, outdoors, energy) VALUES(Go to a local farmers market., 'productivity', 1, 3)");
+        "INSERT INTO Activities(name, category, outdoors, energy) VALUES('Go to a local farmers market.', 'productivity', 1, 3)");
     db.rawInsert(
         "INSERT INTO Activities(name, category, outdoors, energy) VALUES('Listen to some calming music', 'relaxation', 0, 1)");
     db.rawInsert(
