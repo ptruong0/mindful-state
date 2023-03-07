@@ -14,11 +14,11 @@ class Database {
   static Future<void> createTables(sql.Database database) async {
     await database.execute("""CREATE TABLE Activities(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          name: TEXT,
-          category: TEXT,
-          outdoors: int,
+          name TEXT,
+          category TEXT,
+          outdoors int,
           energy int,
-          score: int NOT NULL DEFAULT 0
+          score int NOT NULL DEFAULT 0
         )""");
   }
 
@@ -130,5 +130,10 @@ class Database {
     final db = await Database.db();
     await db.rawUpdate(
         'UPDATE Activities SET score = score + ? WHERE id = ?', [change, id]);
+  }
+
+  static Future<List<Map<String, dynamic>>> getItems() async {
+    final db = await Database.db();
+    return db.query('Activities', orderBy: "id");
   }
 }

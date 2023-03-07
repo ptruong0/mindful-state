@@ -7,6 +7,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'db.dart';
+
 // Define a stateful widget called HomePage
 class HomePage extends StatefulWidget {
   final User? user;
@@ -19,7 +21,7 @@ class HomePage extends StatefulWidget {
 
 // activity type dropdown content
 const List<String> typeList = ['fitness', 'relaxation', 'fun', 'productivity'];
-
+List<Map<String, dynamic>> myData = [];
 // slider labels
 // const List<String> _moodSliderLabels = [
 //   'bad',
@@ -94,8 +96,11 @@ class _HomePageState extends State<HomePage> {
 
   // todo: recommendation algorithm
   // click handler for generate button
+
   void getActivity() {
     // print(moodValue);
+
+    print(myData[0]);
     print(energyValue);
     print(activityType);
     weather?.then((result) {
@@ -147,6 +152,13 @@ class _HomePageState extends State<HomePage> {
     return wf.currentWeatherByLocation(lat, lon);
   }
 
+  void _refreshData() async {
+    final data = await Database.getItems();
+    setState(() {
+      myData = data;
+    });
+  }
+
   // when page loads, fetch position & weather data and store in state
   @override
   initState() {
@@ -164,6 +176,7 @@ class _HomePageState extends State<HomePage> {
         weather = _getWeather(wf, pos!.latitude, pos.longitude);
       });
     });
+    _refreshData();
   }
 
   // Build the HomePage widget
