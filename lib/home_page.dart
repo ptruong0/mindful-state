@@ -363,7 +363,6 @@ class _HomePageState extends State<HomePage> {
                 '$greeting, $userName',
                 style:
                     const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-
                 textAlign: TextAlign.center,
               ),
             ),
@@ -395,7 +394,6 @@ class _HomePageState extends State<HomePage> {
                   );
                 }).toList(),
               ),
-
             ),
             const SizedBox(height: 30), // add some spacing
 
@@ -496,7 +494,7 @@ class _HomePageState extends State<HomePage> {
                       ? Container(
                           width: MediaQuery.of(context).size.width,
                           padding: const EdgeInsets.all(10),
-                          color: Theme.of(context).primaryColor,
+                          //color: Theme.of(context).primaryColor,
                           child: Column(
                             children: [
                               // section label
@@ -518,7 +516,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 decoration: const BoxDecoration(
-                                    color: Colors.deepPurple,
+                                    //color: Colors.deepPurple,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: Text(
@@ -529,7 +527,7 @@ class _HomePageState extends State<HomePage> {
                               // refresh button to get the next top activity
                               IconButton(
                                   icon: const Icon(Icons.refresh),
-                                  color: Theme.of(context).colorScheme.primary,
+                                  //color: Theme.of(context).colorScheme.primary,
                                   onPressed:
                                       // prevent further refreshes if reached the last activity in the list
                                       currentActivityIndex <
@@ -566,7 +564,7 @@ class _HomePageState extends State<HomePage> {
                     }
                     return Container(
                         height: 50,
-                        color: Theme.of(context).primaryColor,
+                        //color: Theme.of(context).primaryColor,
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
@@ -579,7 +577,7 @@ class _HomePageState extends State<HomePage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
                                   decoration: const BoxDecoration(
-                                      color: Colors.deepPurple,
+                                      //color: Colors.deepPurple,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
                                   child: Text(activities[itemIndex].category,

@@ -77,7 +77,17 @@ class LoginPage extends StatelessWidget {
             SignInButton(
               Buttons.google,
               text: "Sign up with Google",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const HomePage(
+                        user: null,
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
