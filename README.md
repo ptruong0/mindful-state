@@ -2,15 +2,11 @@
 
 A new Flutter project.
 
-## Getting Started
+## Building
 
-This project is a starting point for a Flutter application.
+To get mindful state up and running, install the following:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter 3.75+, Dart 2.19.2+](https://docs.flutter.dev/get-started/install)
+- [OpenJDK 11+](https://www.azul.com/downloads/?package=jdk)
+- [Android Studio with Build Tools](https://developer.android.com/studio/install)
+- [Visual Studio with Desktop Development](https://visualstudio.microsoft.com/downloads/)

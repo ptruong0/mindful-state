@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindful_state/activity.dart';
 import 'package:mindful_state/settings_page.dart';
@@ -8,7 +9,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Define a stateful widget called HomePage
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final User? user;
+  const HomePage({Key? key, required this.user}) : super(key: key);
 
   // Return a new state object
   @override
@@ -182,7 +184,10 @@ class _HomePageState extends State<HomePage> {
     }
 
     // temporary placeholder for user name
-    const userName = 'user';
+    String userName = 'user';
+    if (widget.user != null && widget.user!.displayName != null) {
+      userName = widget.user!.displayName!;
+    }
     // Return a Scaffold widget
     return Scaffold(
       key: _scaffoldKey, // Use the scaffold key to identify the scaffold
@@ -196,11 +201,16 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: const CircleAvatar(
-                    backgroundImage: AssetImage('images/user_avatar.jpg'),
-                    radius: 15,
-                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: widget.user != null && widget.user?.photoURL != null
+                      ? CircleAvatar(
+                          backgroundImage: NetworkImage(widget.user!.photoURL!),
+                          radius: 15,
+                        )
+                      : const CircleAvatar(
+                          backgroundImage: AssetImage('images/user_avatar.jpg'),
+                          radius: 15,
+                        ),
                 ),
               ],
             ),
@@ -342,6 +352,7 @@ class _HomePageState extends State<HomePage> {
             //     },
             //   ),
             // ),
+
             const SizedBox(height: 10), // add some top padding
 
             // greeting text
@@ -352,6 +363,7 @@ class _HomePageState extends State<HomePage> {
                 '$greeting, $userName',
                 style:
                     const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+
                 textAlign: TextAlign.center,
               ),
             ),
@@ -383,6 +395,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }).toList(),
               ),
+
             ),
             const SizedBox(height: 30), // add some spacing
 
@@ -456,8 +469,8 @@ class _HomePageState extends State<HomePage> {
             // button to generate activity
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.background,
+                //backgroundColor: Theme.of(context).colorScheme.primary,
+                //foregroundColor: Theme.of(context).colorScheme.background,
                 elevation: 1,
               ),
               onPressed: getActivity,
@@ -592,12 +605,19 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const DrawerHeader(
+            DrawerHeader(
               // Display the user's avatar in the drawer header
               child: CircleAvatar(
-                backgroundImage: AssetImage('images/user_avatar.jpg'),
+                backgroundImage: widget.user?.photoURL != null
+                    ? NetworkImage(
+                        widget.user!.photoURL!,
+                      )
+                    : const AssetImage('images/user_avatar.jpg')
+                        as ImageProvider,
+                radius: 50,
               ),
             ),
+
             // Define a list tile for the settings page
             ListTile(
               leading: const Icon(Icons.settings),
