@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mindful_state/services/recommendations.dart';
+import 'package:weather/weather.dart';
+
+import 'services/activity.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({Key? key}) : super(key: key);
+  const HomeTab({required this.weather, Key? key}) : super(key: key);
+
+  final Weather weather;
 
   @override
   _HomeTabState createState() => _HomeTabState();
@@ -10,9 +16,11 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   String activityType = 'fitness';
   double energyValue = 1.0;
+  late List<Activity> activities;
 
   void getActivity() {
-    // code to generate activity
+    Map<int, int> test = generateRecommendations(
+        activityType, energyValue, activities, widget.weather);
   }
 
   final List<String> typeList = <String>[

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'activity.dart';
+import 'services/activity.dart';
 
 class ActivitiesTab extends StatefulWidget {
   const ActivitiesTab({Key? key}) : super(key: key);

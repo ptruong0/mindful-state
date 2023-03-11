@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:mindful_state/services/recommendations.dart';
 import 'package:weather/weather.dart';
 
 import 'activities_tab.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindful_state/settings_page.dart';
 
-import 'db.dart';
+import 'services/db.dart';
 
 // Define a stateful widget called HomePage
 class HomePage extends StatefulWidget {
@@ -21,9 +22,6 @@ class HomePage extends StatefulWidget {
 }
 
 List<Map<String, dynamic>> myData = [];
-
-// list of weather values that should lead to indoor activity recommendations
-const List<String> indoorWeather = ['Rain', 'Snow', 'Extreme'];
 
 // number of activities that will be displayed on the recommendation page
 const int numResultsShown = 3;
@@ -173,7 +171,7 @@ class _HomePageState extends State<HomePage> {
       ),
       // Define the body of the scaffold based on the selected page index
       body: <Widget>[
-        const HomeTab(),
+        HomeTab(weather),
         const ActivitiesTab(),
         Container(
           // TODO: finish contents for third page
