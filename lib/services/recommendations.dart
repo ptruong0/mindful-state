@@ -4,9 +4,17 @@ import 'package:weather/weather.dart';
 
 import 'activity.dart';
 
-Map<int, int> generateRecommendations(String category, double energy,
+// how strongly we should consider each factor when assigning scores to activities
+const Map<String, double> weights = {
+  'category': 0.5,
+  'weather': 0.2,
+  'energy': 0.2,
+  'pastScore': 0.1
+};
+
+List<Activity> generateRecommendations(String category, double energy,
     List<Activity> activities, Weather weather) {
-  Map<int, int> recommendDict = {};
+  Map<int, double> recommendDict = {};
 
   bool rainOrSnow = false;
 
@@ -17,40 +25,57 @@ Map<int, int> generateRecommendations(String category, double energy,
     rainOrSnow = true;
   }
 
+  
   for (var i in activities) {
+    // try to rank each on a scale of 1 to 10
+    // weights will differentiate the importance of each factor
+    double categoryScore = 0;
+    double weatherScore = 0;
+    double energyScore = 0;
+
+    // category matches
     if (i.category == category) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 5;
+      categoryScore += 5;
     }
 
-    if (i.indoors == false && rainOrSnow == false) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 1;
+    // outdoors, good weather
+    if (i.outdoors && !rainOrSnow) {
+      weatherScore += 10; // ideal
     }
-
-    if (i.indoors == false && rainOrSnow == true) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 1;
+    // outdoors, bad weather
+    else if (i.outdoors && rainOrSnow) {
+      recommendDict[i.id] = -1000;  // don't recommend!
+      continue;
     }
-
-    if (i.indoors == true && rainOrSnow == true) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 1;
+    // indoors, bad weather
+    else if (!i.outdoors && rainOrSnow) {
+      weatherScore += 10; // ideal
     }
-
-    if (i.indoors == true && rainOrSnow == false) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) - 1000;
+    // indoors, good weather
+    else {
+      weatherScore += 5;  // ok
     }
-
     if (i.energy == energy) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 2;
+      energyScore += 10;
+    } else if (i.energy < energy) {
+      // +score if user energy is closer to activity energy level
+      energyScore += 10 - (energy - i.energy);
+    } else {
+      // activity energy is higher than user energy, not great
+      energyScore += 1;
     }
 
-    if (i.energy < energy) {
-      recommendDict[i.id] = (recommendDict[i.id] ?? 0) + 1;
-    }
-
-    recommendDict[i.id] = (recommendDict[i.id] ?? 0) + i.score;
+    recommendDict[i.id] = (categoryScore * weights['category']!) + 
+        (weatherScore * weights['weather']!) + 
+        (energyScore * weights['energy']!) + 
+        // user past score
+        (i.score * weights['pastScore']!);
   }
 
-  var sortedDict = recommendDict.entries.toList()
-    ..sort((a, b) => b.value.compareTo(a.value));
+  // sort activities from highest to lowest score
+  activities.sort((a, b) {
+    return recommendDict[b.id]!.compareTo(recommendDict[a.id]!);
+  });
 
-  return Map.fromEntries(sortedDict);
+  return activities;
 }

@@ -1,19 +1,17 @@
 class Activity {
+  int id;
   String name;
   String category;
-  bool indoors;
-  int id;
-  double energy;
+  bool outdoors;
+  int energy;
   int score;
-  // can add more
-  // energy level
-  // user score
 
-  Activity(
-      {required this.name,
-      required this.category,
-      required this.indoors,
+  Activity({
       required this.id,
+      required this.name,
+      required this.category,
+      required this.outdoors,
       required this.energy,
-      required this.score});
+      required this.score
+      });
 }

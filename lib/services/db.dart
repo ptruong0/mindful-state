@@ -7,11 +7,13 @@ class Database {
       version: 1,
       onCreate: (sql.Database database, int version) async {
         await createTables(database);
+        await initializeData(database);
       },
     );
   }
 
   static Future<void> createTables(sql.Database database) async {
+    await database.execute('DROP TABLE IF EXISTS Activities');
     await database.execute("""CREATE TABLE Activities(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           name TEXT,
@@ -22,8 +24,8 @@ class Database {
         )""");
   }
 
-  static Future<void> initializeData() async {
-    final db = await Database.db();
+  static Future<void> initializeData(sql.Database db) async {
+    // final db = await Database.db();
     db.rawInsert(
         "INSERT INTO Activities(name, category, outdoors, energy) VALUES('Take a 30-minute walk.', 'fitness', 1, 3)");
     db.rawInsert(
