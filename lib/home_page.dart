@@ -1,5 +1,4 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:mindful_state/services/recommendations.dart';
 import 'package:weather/weather.dart';
 
 import 'activities_tab.dart';
@@ -171,7 +170,7 @@ class _HomePageState extends State<HomePage> {
       ),
       // Define the body of the scaffold based on the selected page index
       body: <Widget>[
-        HomeTab(weather),
+        HomeTab(weather: weather),
         const ActivitiesTab(),
         Container(
           // TODO: finish contents for third page

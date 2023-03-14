@@ -1,7 +1,5 @@
 // boiler plate code for recommendation
 // taken from Swarna pseudocode
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:weather/weather.dart';
 
 import 'activity.dart';

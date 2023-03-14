@@ -20,10 +20,34 @@ class _ActivitiesTabState extends State<ActivitiesTab> {
     super.initState();
     currentActivityIndex = 0;
     activities = [
-      Activity(name: 'ride a bike', category: 'fitness', indoors: false),
-      Activity(name: 'take a walk', category: 'fitness', indoors: false),
-      Activity(name: 'meditate', category: 'relaxation', indoors: true),
-      Activity(name: 'read a book', category: 'relaxation', indoors: true)
+      Activity(
+          name: 'ride a bike',
+          category: 'fitness',
+          indoors: false,
+          id: 1,
+          energy: 3,
+          score: 5),
+      Activity(
+          name: 'take a walk',
+          category: 'fitness',
+          indoors: false,
+          id: 2,
+          energy: 2,
+          score: 5),
+      Activity(
+          name: 'meditate',
+          category: 'relaxation',
+          indoors: true,
+          id: 1,
+          energy: 1,
+          score: 5),
+      Activity(
+          name: 'read a book',
+          category: 'relaxation',
+          indoors: true,
+          id: 1,
+          energy: 1,
+          score: 5),
     ];
     // change to something like Activity.generateActivities();
   }
