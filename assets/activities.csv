@@ -1,0 +1,50 @@
+Take a 30-minute walk.,fitness,1,3
+Go for a jog around the block.,fitness,1,4
+Do some at-home yoga.,fitness,0,3
+Lift weights at the gym.,fitness,0,4
+Go bike riding for 2 miles.,fitness,1,5
+Follow a Zumba tutorial on Youtube.,fitness,0,5
+Play golf or mini-golf.,fitness,1,3
+Take a hike in nature.,fitness,1,4
+Play a sport with friends.,fitness,1,4
+Go to a rock-climbing gym.,fitness,0,5
+Try a new fitness class like pilates.,fitness,0,5
+Try a new fitness class like spin.,fitness,0,5
+Try a new fitness class like kickboxing.,fitness,0,5
+Follow a home ab workout on Youtube.,fitness,0,5
+Do a HIIT (high-intensity interval training) workout.,fitness,0,5
+Walk around at a local park or trail.,fitness,1,3
+Use a cardio machine like the Stairmaster or elliptical at the gym.,fitness,0,5
+Go swimming at a local pool or beach.,fitness,1,5
+Meditate for 15 minutes.,relaxation,0,1
+Read a book.,relaxation,0,2
+Try to cook a new recipe.,fun,0,3
+Bake soe tasty treats such as cookies or muffins.,fun,0,3
+Have a picnic outside and enjoy the sunshine.,relaxation,1,2
+Take a relaxing hot bath.,relaxation,0,1
+Deep clean one room in your home.,productivity,0,3
+Ask a friend to hang out.,fun,0,2
+Sing karaoke.,fun,0,3
+Doodle in a sketch book and/or follow a drawing tutorial.,fun,0,2
+Color in a coloring book.,fun,0,2
+Do a puzzle.,fun,0,2
+Watch your favorite TV show.,relaxation,0,1
+Watch your favorite movie.,relaxation,0,1
+Paint a portrait.,fun,0,2
+Try outdoor photography.,fun,1,2
+Start a DIY project or home improvement task.,productivity,0,3
+Go to a local farmers' market.,productivity,1,3
+Listen to some calming music,relaxation,0,1
+Go to a spa for a massage.,relaxation,0,2
+Plant a garden or tend to houseplants.,relaxation,1,3
+Play a musical instrument.,fun,0,3
+Write a short story as a creative writing exercise.,fun,0,2
+Write about your thoughts in a journal.,relaxation,0,2
+"Volunteer at a local food bank, senior home, or animal shelter.",productivity,1,4
+Try a Korean face mask routine.,relaxation,0,1
+Shop at the mall and buy something for yourself.,fun,0,3
+"Attend a creative workshop, like pottery or painting.",fun,0,3
+Visit a local museum or art gallery.,fun,0,3
+Go to the movie theatre with a friend.,fun,0,2
+"Play cognitive games, such as Sudoku or crossword puzzles.",relaxation,0,2
+Learn a new language online.,productivity,0,2

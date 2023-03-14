@@ -47,6 +47,7 @@ dependencies:
   sign_in_button: ^3.1.0
   firebase_auth: ^4.2.9
   firebase_core: ^2.7.0
+  csv: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ flutter:
   assets:
     - images/
     - .env
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
