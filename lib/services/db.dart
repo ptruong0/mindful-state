@@ -11,11 +11,13 @@ class Database {
       version: 1,
       onCreate: (sql.Database database, int version) async {
         await createTables(database);
+        await initializeData(database);
       },
     );
   }
 
   static Future<void> createTables(sql.Database database) async {
+    await database.execute('DROP TABLE IF EXISTS Activities');
     await database.execute("""CREATE TABLE Activities(
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           name TEXT,
@@ -26,8 +28,7 @@ class Database {
         )""");
   }
 
-  static Future<void> initializeData() async {
-    final db = await Database.db();
+  static Future<void> initializeData(sql.Database db) async {
     // load in data from file
     String excelFilePath = await rootBundle.loadString('assets/activities.csv');
     List<List<dynamic>> excelData =

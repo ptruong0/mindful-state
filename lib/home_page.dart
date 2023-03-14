@@ -1,4 +1,5 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:mindful_state/services/activity.dart';
 import 'package:weather/weather.dart';
 
 import 'activities_tab.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mindful_state/settings_page.dart';
 
-import 'db.dart';
+import 'services/db.dart';
 
 // Define a stateful widget called HomePage
 class HomePage extends StatefulWidget {
@@ -22,16 +23,13 @@ class HomePage extends StatefulWidget {
 
 List<Map<String, dynamic>> myData = [];
 
-// list of weather values that should lead to indoor activity recommendations
-const List<String> indoorWeather = ['Rain', 'Snow', 'Extreme'];
-
-// number of activities that will be displayed on the recommendation page
-const int numResultsShown = 3;
 
 // Define the state of the HomePage
 class _HomePageState extends State<HomePage> {
   Position? position;
   Future<Weather>? weather;
+  // recommended activities (empty at first)
+  late List<Activity> activities = [];
 
 // calls WeatherService to get current position and weather
   @override
@@ -49,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         weather =
             WeatherService.getCurrentWeather(pos!.latitude, pos.longitude);
+            print(weather);
       });
     });
     _refreshData();
@@ -56,10 +55,19 @@ class _HomePageState extends State<HomePage> {
 
 // refreshes data from database
   void _refreshData() async {
-    await Database.initializeData();
+    await Database.db();
     final data = await Database.getItems();
     setState(() {
       myData = data;
+      print(myData);
+    });
+  }
+
+  // navigates to activities tab with recommendation data
+  void toActivitiesTab(List<Activity> activitiesSorted) {
+    setState(() {
+      currentPageIndex = 1;
+      activities = activitiesSorted;
     });
   }
 
@@ -70,26 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   // A key to uniquely identify the scaffold
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  // determines which activity in list is displayed
-  int currentActivityIndex = 0;
-
   // -----------------------------------------------------------------------
-
-  void recommendationSystem(bool indoors) {
-    // look through activities in the database (or index ideally)
-
-    // ALGORITHM HERE
-
-    // setState(() {
-    //   activities = ...;
-    // });
-  }
-
-  // todo: recommendation algorithm
-  // click handler for generate button
-
-  void getActivity() {}
 
   // Build the HomePage widget
   @override
@@ -173,8 +162,8 @@ class _HomePageState extends State<HomePage> {
       ),
       // Define the body of the scaffold based on the selected page index
       body: <Widget>[
-        const HomeTab(),
-        const ActivitiesTab(),
+        HomeTab(weather: weather, activityData: myData, toActivitiesTab: toActivitiesTab),
+        ActivitiesTab(activities: activities),
         Container(
           // TODO: finish contents for third page
           // ideally this page will display data gathered from user

@@ -1,18 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:mindful_state/services/recommendations.dart';
+import 'package:weather/weather.dart';
+
+import 'services/activity.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({Key? key}) : super(key: key);
+  const HomeTab(
+      {required this.weather,
+      required this.activityData,
+      required this.toActivitiesTab,
+      Key? key})
+      : super(key: key);
+
+  final Future<Weather>? weather;
+  final List<Map<String, dynamic>> activityData;
+  final Function toActivitiesTab;
 
   @override
   _HomeTabState createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
-  String activityType = 'fitness';
+  // stores user input values
+  String activityCategory = 'fitness';
   double energyValue = 1.0;
 
-  void getActivity() {
-    // code to generate activity
+  Future<void> getActivity() async {
+    if (widget.weather == null) {
+      return;
+    }
+    // print(widget.activityData.length);
+
+    // transform database data into list of activity objects
+    List<Activity> activities = widget.activityData
+        .map((a) => Activity(
+            id: a['id'],
+            name: a['name'],
+            category: a['category'],
+            outdoors: a['outdoors'] == 1 ? true : false,
+            energy: a['energy'],
+            score: a['score']))
+        .toList();
+
+    // when weather is done loading,
+    widget.weather?.then((weatherValue) {
+      print(weatherValue);
+      // run recommendation algorithm
+      List<Activity> activityResults = generateRecommendations(
+          activityCategory, energyValue, activities, weatherValue);
+
+      // navigate to activities tab and pass sorted list of activities
+      widget.toActivitiesTab(activityResults);
+    });
   }
 
   final List<String> typeList = <String>[
@@ -63,7 +102,7 @@ class _HomeTabState extends State<HomeTab> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: DropdownButton<String>(
-              value: activityType,
+              value: activityCategory,
               icon: const Icon(
                 Icons.keyboard_arrow_down,
               ),
@@ -72,7 +111,7 @@ class _HomeTabState extends State<HomeTab> {
               onChanged: (String? value) {
                 // This is called when the user selects an item.
                 setState(() {
-                  activityType = value!;
+                  activityCategory = value!;
                 });
               },
               items: typeList.map<DropdownMenuItem<String>>((String value) {
@@ -120,9 +159,7 @@ class _HomeTabState extends State<HomeTab> {
             style: ElevatedButton.styleFrom(
               elevation: 1,
             ),
-            onPressed: () {
-              getActivity();
-            },
+            onPressed: widget.weather == null ? null : getActivity,
             child: const Text('Generate Activity'),
           ),
         ],
