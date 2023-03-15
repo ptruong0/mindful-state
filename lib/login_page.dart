@@ -1,6 +1,5 @@
 // Importing required packages and files
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindful_state/services/auth_service.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 import 'home_page.dart';
@@ -54,7 +53,6 @@ class LoginPage extends StatelessWidget {
             // perhaps if time allows we can keep the old material3 sign in/up
             // button and handle authentication ourselves in addition to the
             // Google buttons
-            // TODO: implement Auth with Firebase
             SignInButton(
               Buttons.google,
               text: "Sign in with Google",
@@ -73,7 +71,6 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            // TODO: implement Auth with Firebase
             SignInButton(
               Buttons.google,
               text: "BYPASS SIGN IN",

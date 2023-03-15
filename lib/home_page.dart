@@ -164,7 +164,6 @@ class _HomePageState extends State<HomePage> {
             userName: userName),
         ActivitiesTab(activities: activities),
         Container(
-          // TODO: finish contents for third page
           // ideally this page will display data gathered from user
           // such as mood, stats, and weather?
           alignment: Alignment.center,
