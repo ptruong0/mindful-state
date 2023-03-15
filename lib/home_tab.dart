@@ -5,16 +5,18 @@ import 'package:weather/weather.dart';
 import 'services/activity.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab(
-      {required this.weather,
-      required this.activityData,
-      required this.toActivitiesTab,
-      Key? key})
-      : super(key: key);
+  const HomeTab({
+    required this.weather,
+    required this.activityData,
+    required this.toActivitiesTab,
+    required this.userName, // added this line
+    Key? key,
+  }) : super(key: key);
 
   final Future<Weather>? weather;
   final List<Map<String, dynamic>> activityData;
   final Function toActivitiesTab;
+  final String userName;
 
   @override
   _HomeTabState createState() => _HomeTabState();
@@ -89,10 +91,11 @@ class _HomeTabState extends State<HomeTab> {
         children: <Widget>[
           // greeting text
           Text(
-            '$greeting, user',
+            '$greeting, ${widget.userName}',
             style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
+
           const SizedBox(height: 20), // add some spacing
           const Text(
             'What type of activity do you want to do today?',

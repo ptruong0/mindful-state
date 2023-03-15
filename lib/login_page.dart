@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
             // TODO: implement Auth with Firebase
             SignInButton(
               Buttons.google,
-              text: "Sign up with Google",
+              text: "BYPASS SIGN IN",
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

@@ -23,7 +23,6 @@ class HomePage extends StatefulWidget {
 
 List<Map<String, dynamic>> myData = [];
 
-
 // Define the state of the HomePage
 class _HomePageState extends State<HomePage> {
   Position? position;
@@ -47,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         weather =
             WeatherService.getCurrentWeather(pos!.latitude, pos.longitude);
-            print(weather);
+        print(weather);
       });
     });
     _refreshData();
@@ -83,11 +82,7 @@ class _HomePageState extends State<HomePage> {
   // Build the HomePage widget
   @override
   Widget build(BuildContext context) {
-    // temporary placeholder for user name
-    String userName = 'user';
-    if (widget.user != null && widget.user!.displayName != null) {
-      userName = widget.user!.displayName!;
-    }
+    String userName = widget.user?.displayName ?? 'BYPASS';
     // Return a Scaffold widget
     return Scaffold(
       key: _scaffoldKey, // Use the scaffold key to identify the scaffold
@@ -149,20 +144,24 @@ class _HomePageState extends State<HomePage> {
             ),
             label: 'Activities',
           ),
-          NavigationDestination(
-            selectedIcon: Icon(
-              Icons.health_and_safety,
-            ),
-            icon: Icon(
-              Icons.health_and_safety_outlined,
-            ),
-            label: 'Health',
-          ),
+          // NavigationDestination(
+          //   selectedIcon: Icon(
+          //     Icons.health_and_safety,
+          //   ),
+          //   icon: Icon(
+          //     Icons.health_and_safety_outlined,
+          //   ),
+          //   label: 'Health',
+          // ),
         ],
       ),
       // Define the body of the scaffold based on the selected page index
       body: <Widget>[
-        HomeTab(weather: weather, activityData: myData, toActivitiesTab: toActivitiesTab),
+        HomeTab(
+            weather: weather,
+            activityData: myData,
+            toActivitiesTab: toActivitiesTab,
+            userName: userName),
         ActivitiesTab(activities: activities),
         Container(
           // TODO: finish contents for third page

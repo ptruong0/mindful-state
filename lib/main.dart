@@ -8,6 +8,7 @@ import 'services/firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -18,13 +19,37 @@ void main() async {
   runApp(const MindfulState());
 }
 
-class MindfulState extends StatelessWidget {
+class MindfulState extends StatefulWidget {
   const MindfulState({Key? key}) : super(key: key);
 
-  static final _defaultLightColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.pink);
-  static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.pink, brightness: Brightness.dark);
+  @override
+  _MindfulStateState createState() => _MindfulStateState();
+}
+
+class _MindfulStateState extends State<MindfulState> {
+  bool _showIntro = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkShowIntro();
+  }
+
+  Future<void> _checkShowIntro() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool showIntro = prefs.getBool('showIntro') ?? true;
+    setState(() {
+      _showIntro = showIntro;
+    });
+  }
+
+  Future<void> _setShowIntro(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('showIntro', value);
+    setState(() {
+      _showIntro = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +58,24 @@ class MindfulState extends StatelessWidget {
         lightColorScheme,
         darkColorScheme,
       ) {
+        final defaultLightColorScheme =
+            ColorScheme.fromSwatch(primarySwatch: Colors.pink);
+        final defaultDarkColorScheme = ColorScheme.fromSwatch(
+            primarySwatch: Colors.pink, brightness: Brightness.dark);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: lightColorScheme ?? _defaultLightColorScheme,
+            colorScheme: lightColorScheme ?? defaultLightColorScheme,
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
-            colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
+            colorScheme: darkColorScheme ?? defaultDarkColorScheme,
             useMaterial3: true,
           ),
           themeMode: ThemeMode.light,
-          home: IntroductionPage(),
+          home: _showIntro
+              ? IntroductionPage(onIntroEnd: () => _setShowIntro(false))
+              : const LoginPage(),
         );
       },
     );
@@ -52,11 +83,14 @@ class MindfulState extends StatelessWidget {
 }
 
 class IntroductionPage extends StatelessWidget {
-  IntroductionPage({Key? key}) : super(key: key);
+  final VoidCallback onIntroEnd;
+
+  IntroductionPage({Key? key, required this.onIntroEnd}) : super(key: key);
 
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(BuildContext context) {
+    onIntroEnd();
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (_) => const LoginPage()));
   }
