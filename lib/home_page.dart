@@ -58,7 +58,6 @@ class _HomePageState extends State<HomePage> {
     final data = await Database.getItems();
     setState(() {
       myData = data;
-      print(myData);
     });
   }
 
