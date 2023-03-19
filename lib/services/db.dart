@@ -51,11 +51,12 @@ class Database {
     }
   }
 
-  static Future<void> updateActivityPreference(int? change, int? id) async {
+  static Future<void> updateActivityPreference(
+      int? change, String? name) async {
     final db = await Database.db();
 
-    await db.rawUpdate(
-        'UPDATE Activities SET score = score + ? WHERE id = ?', [change, id]);
+    await db.rawUpdate('UPDATE Activities SET score = score + ? WHERE name = ?',
+        [change, name]);
   }
 
   static Future<List<Map<String, dynamic>>> getItems() async {

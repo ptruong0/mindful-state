@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'services/activity.dart';
+import 'services/db.dart';
 
 class ActivitiesTab extends StatefulWidget {
   const ActivitiesTab({required this.activities, Key? key}) : super(key: key);
@@ -71,6 +72,49 @@ class _ActivitiesTabState extends State<ActivitiesTab> {
                                     widget.activities[currentActivityIndex]
                                         .category,
                                     style: const TextStyle(fontSize: 14)),
+                              ),
+                              Center(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: const Text(
+                                            "Did you like this activity?"),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () async {
+                                              // Handle "Like" button press
+                                              Navigator.of(ctx).pop();
+                                              await Database
+                                                  .updateActivityPreference(
+                                                      1,
+                                                      widget
+                                                          .activities[
+                                                              currentActivityIndex]
+                                                          .name);
+                                            },
+                                            child: const Text("Like"),
+                                          ),
+                                          TextButton(
+                                              onPressed: () async {
+                                                // Handle "Dislike" button press
+                                                Navigator.of(ctx).pop();
+                                                await Database
+                                                    .updateActivityPreference(
+                                                        1,
+                                                        widget
+                                                            .activities[
+                                                                currentActivityIndex]
+                                                            .name);
+                                              },
+                                              child: const Text("Dislike")),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Complete"),
+                                ),
                               ),
 
                               // refresh button to get the next top activity
